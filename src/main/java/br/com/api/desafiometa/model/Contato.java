@@ -1,5 +1,7 @@
 package br.com.api.desafiometa.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,40 +11,32 @@ public class Contato implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "serial")
-    private Integer idContato;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-    @Column(name = "nome")
     private String nome;
-
-    @Column(unique = true)
-    private String email;
-    private String valorEmail;
+    private String tipoDeContato;
+    private String valorContato;
     private String observacao;
 
     public Contato() {
     }
 
-    public Contato(Integer idContato, String nome, String email, String valorEmail, String observacao) {
+    public Contato(Integer id, String nome, String tipoDeContato, String valorContato, String observacao) {
         super();
-        this.idContato = idContato;
+        this.id = id;
         this.nome = nome;
-        this.email = email;
-        this.valorEmail = valorEmail;
+        this.tipoDeContato = tipoDeContato;
+        this.valorContato = valorContato;
         this.observacao = observacao;
     }
 
-    public Contato(String nome, String email, String valorEmail, String observacao) {
+    public Integer getId() {
+        return id;
     }
 
-    @Id
-    public Integer getIdContato() {
-        return idContato;
-    }
-
-    public void setIdContato(Integer idContato) {
-        this.idContato = idContato;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -53,20 +47,20 @@ public class Contato implements Serializable {
         this.nome = nome;
     }
 
-    public String getEmail() {
-        return email;
+    public String getTipoDeContato() {
+        return tipoDeContato;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTipoDeContato(String tipoDeContato) {
+        this.tipoDeContato = tipoDeContato;
     }
 
-    public String getValorEmail() {
-        return valorEmail;
+    public String getValorContato() {
+        return valorContato;
     }
 
-    public void setValorEmail(String valorEmail) {
-        this.valorEmail = valorEmail;
+    public void setValorContato(String valorContato) {
+        this.valorContato = valorContato;
     }
 
     public String getObservacao() {
@@ -80,10 +74,10 @@ public class Contato implements Serializable {
     @Override
     public String toString() {
         return "Contato{" +
-                "idContato=" + idContato +
+                "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
-                ", valorEmail='" + valorEmail + '\'' +
+                ", tipoDeContato='" + tipoDeContato + '\'' +
+                ", valorContato='" + valorContato + '\'' +
                 ", observacao='" + observacao + '\'' +
                 '}';
     }

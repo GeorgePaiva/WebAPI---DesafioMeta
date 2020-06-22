@@ -1,7 +1,5 @@
 package br.com.api.desafiometa.service;
 
-import br.com.api.desafiometa.dto.ContatoDTO;
-import br.com.api.desafiometa.dto.ContatoNewDTO;
 import br.com.api.desafiometa.exceptions.DataIntegrityException;
 import br.com.api.desafiometa.model.Contato;
 import br.com.api.desafiometa.repositories.ContatoRepository;
@@ -23,31 +21,25 @@ public class ContatoService {
     @Autowired
     private ContatoRepository repo;
 
-    public Contato find(Integer idContato) {
-        Optional<Contato> obj = repo.findById(idContato);
-        return obj.orElseThrow(() ->
-                new ObjectNotFoundException(
-                        "Objeto não encontrado! Id: " + idContato + ", " +
-                                "Tipo: " + Contato.class.getName(), Contato.class.getName()));
+    public Contato findById(Integer id) {
+        Optional<Contato> obj = repo.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(
+                "Objeto não encontrado! Id: " + id + ", Tipo: " + Contato.class.getName(), Contato.class.getName()));
     }
 
-    @Transactional
     public Contato insert(Contato obj) {
-        obj.setIdContato(null);
-        obj = repo.save(obj);
-        return obj;
+        return repo.save(obj);
     }
 
     public Contato update(Contato obj) {
-        Contato newObj = find(obj.getIdContato());
-        updateData(newObj, obj);
+        Contato newObj = findById(obj.getId());
         return repo.save(newObj);
     }
 
-    public void delete(Integer idContato) {
-        find(idContato);
+    public void delete(Integer id) {
+        findById(id);
         try {
-            repo.deleteById(idContato);
+            repo.deleteById(id);
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityException("Não é possável excluir porque há entidades relacionadas");
         }
@@ -57,26 +49,10 @@ public class ContatoService {
         return repo.findAll();
     }
 
-    // Método que retorna as categorias especificadas.
     public Page<Contato> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return repo.findAll(pageRequest);
     }
 
-    // Método auxiliar que instância uma Categoria a partir de DTO.
-    public Contato fromDTO(ContatoDTO objDto) {
-        return new Contato(objDto.getIdContato(), objDto.getNome(), objDto.getEmail(), null, null);
-    }
-
-    public Contato fromDTO(ContatoNewDTO objDto) {
-        Contato contato = new Contato(null, objDto.getNome(), objDto.getEmail(), objDto.getValorEmail(),
-                objDto.getObservacao());
-        return contato;
-    }
-
-    private void updateData(Contato newObj, Contato obj) {
-        newObj.setNome(obj.getNome());
-        newObj.setEmail(obj.getEmail());
-    }
 }
 
