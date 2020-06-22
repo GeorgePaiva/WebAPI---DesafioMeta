@@ -1,22 +1,31 @@
-package dto;
+package br.com.api.desafiometa.model;
 
-import model.Contato;
-
+import javax.persistence.*;
 import java.io.Serializable;
 
-public class ContatoDTO implements Serializable {
+@Entity
+@Table(name = "contatos")
+public class Contato implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
     private Integer idContato;
+
+    @Column(name = "nome")
     private String nome;
+
+    @Column(unique = true)
     private String email;
     private String valorEmail;
     private String observacao;
 
-    public ContatoDTO() {
+    public Contato() {
     }
 
-    public ContatoDTO(Contato obj) {
+    public Contato(Integer idContato, String nome, String email, String valorEmail, String observacao) {
+        super();
         this.idContato = idContato;
         this.nome = nome;
         this.email = email;
@@ -24,6 +33,10 @@ public class ContatoDTO implements Serializable {
         this.observacao = observacao;
     }
 
+    public Contato(String nome, String email, String valorEmail, String observacao) {
+    }
+
+    @Id
     public Integer getIdContato() {
         return idContato;
     }
@@ -62,5 +75,16 @@ public class ContatoDTO implements Serializable {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    @Override
+    public String toString() {
+        return "Contato{" +
+                "idContato=" + idContato +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", valorEmail='" + valorEmail + '\'' +
+                ", observacao='" + observacao + '\'' +
+                '}';
     }
 }

@@ -1,9 +1,10 @@
-package services;
+package br.com.api.desafiometa.service;
 
-import dto.ContatoDTO;
-import dto.ContatoNewDTO;
-import exceptions.DataIntegrityException;
-import model.Contato;
+import br.com.api.desafiometa.dto.ContatoDTO;
+import br.com.api.desafiometa.dto.ContatoNewDTO;
+import br.com.api.desafiometa.exceptions.DataIntegrityException;
+import br.com.api.desafiometa.model.Contato;
+import br.com.api.desafiometa.repositories.ContatoRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -12,7 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import repositories.ContatoRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -79,3 +79,4 @@ public class ContatoService {
         newObj.setEmail(obj.getEmail());
     }
 }
+

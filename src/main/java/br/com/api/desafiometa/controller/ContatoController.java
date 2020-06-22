@@ -1,14 +1,14 @@
-package controller;
+package br.com.api.desafiometa.controller;
 
-import dto.ContatoDTO;
-import dto.ContatoNewDTO;
-import model.Contato;
+import br.com.api.desafiometa.dto.ContatoDTO;
+import br.com.api.desafiometa.dto.ContatoNewDTO;
+import br.com.api.desafiometa.model.Contato;
+import br.com.api.desafiometa.service.ContatoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import services.ContatoService;
 
 import java.net.URI;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/contatos")
 public class ContatoController {
 
-    // Instacia automaticamente
+    //Instacia automaticamente
     @Autowired
     private ContatoService service;
 

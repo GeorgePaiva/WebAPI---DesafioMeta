@@ -1,18 +1,27 @@
-package dto;
+package br.com.api.desafiometa.dto;
+
+import br.com.api.desafiometa.model.Contato;
 
 import java.io.Serializable;
 
-public class ContatoNewDTO implements Serializable {
+public class ContatoDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer idContato;
     private String nome;
-
     private String email;
     private String valorEmail;
     private String observacao;
 
-    public ContatoNewDTO() {
+    public ContatoDTO() {
+    }
+
+    public ContatoDTO(Contato obj) {
+        this.idContato = idContato;
+        this.nome = nome;
+        this.email = email;
+        this.valorEmail = valorEmail;
+        this.observacao = observacao;
     }
 
     public Integer getIdContato() {

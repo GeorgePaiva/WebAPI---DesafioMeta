@@ -1,4 +1,4 @@
-package exceptions;
+package br.com.api.desafiometa.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException {
 
